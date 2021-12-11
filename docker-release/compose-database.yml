@@ -1,0 +1,18 @@
+version: "3.5"
+
+services:
+  mysql:
+    image: mysql:8.0.26
+    container_name: mysql-db
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=Aforo255#2019
+    ports:
+      - 3307:3306
+      - 33061:33060
+    networks:
+      - aforo255
+
+networks:
+  aforo255:
+    name: micro-java-1
