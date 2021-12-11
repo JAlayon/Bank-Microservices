@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/transaction")
-public class TransactionControlller {
+public class TransactionController {
 
     @Autowired
     ITransactionService transactionService;
@@ -24,7 +24,7 @@ public class TransactionControlller {
     @Autowired
     TransactionMessagePublish messageEvent;
 
-    Logger logger = LoggerFactory.getLogger(TransactionControlller.class);
+    Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
     @PostMapping("/deposit")
     public ResponseEntity<?> deposit(@RequestBody final TransactionRequest request) throws Exception {
