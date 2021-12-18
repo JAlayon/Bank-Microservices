@@ -13,7 +13,7 @@ services:
       - NUM_PARTITIONS=3
     networks:
       - aforo255
-      -
+
 networks:
   aforo255:
     name: micro-java-1

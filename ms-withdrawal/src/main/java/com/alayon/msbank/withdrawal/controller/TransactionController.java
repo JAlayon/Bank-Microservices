@@ -1,6 +1,7 @@
 package com.alayon.msbank.withdrawal.controller;
 
 import com.alayon.msbank.withdrawal.dtos.TransactionRequest;
+import com.alayon.msbank.withdrawal.messages.TransactionMessagePublish;
 import com.alayon.msbank.withdrawal.models.TransactionModel;
 import com.alayon.msbank.withdrawal.services.ITransactionService;
 import org.slf4j.Logger;
@@ -20,6 +21,9 @@ public class TransactionController {
     @Autowired
     ITransactionService transactionService;
 
+    @Autowired
+    TransactionMessagePublish messageEvent;
+
     Logger logger = LoggerFactory.getLogger(TransactionController.class);
 
     @PostMapping("/withdrawal")
@@ -31,6 +35,9 @@ public class TransactionController {
         transactionModel.setAmount(request.getAmount());
         transactionModel.setType("withdrawal");
         transactionModel = transactionService.add(transactionModel);
+
+        messageEvent.sendDepositEvent(transactionModel);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(transactionModel);
     }
 }
