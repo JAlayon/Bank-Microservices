@@ -21,6 +21,16 @@ services:
       - "9411:9411"
     networks:
       - aforo255
+  metrics:
+    image: prom/prometheus:v2.31.1
+    container_name: service-metrics
+    restart: always
+    ports:
+      - "9090:9090"
+    networks:
+      - aforo255
+    volumes:
+      - /Users/jairsauceda/programming/spring/aforo255/ms-bank/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
 
 networks:
   aforo255:
