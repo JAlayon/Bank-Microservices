@@ -17,6 +17,7 @@
         <module>ms-account</module>
         <module>ms-movements</module>
         <module>ms-withdrawal</module>
+        <module>api-gateway</module>
     </modules>
 
     <groupId>com.alayon</groupId>

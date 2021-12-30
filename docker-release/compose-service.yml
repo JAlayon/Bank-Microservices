@@ -13,6 +13,14 @@ services:
       - NUM_PARTITIONS=3
     networks:
       - aforo255
+  tracer:
+    image: openzipkin/zipkin:2
+    container_name: service-tracer
+    restart: always
+    ports:
+      - "9411:9411"
+    networks:
+      - aforo255
 
 networks:
   aforo255:

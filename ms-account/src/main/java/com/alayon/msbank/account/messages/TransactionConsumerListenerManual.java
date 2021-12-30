@@ -1,4 +1,3 @@
-/*
 package com.alayon.msbank.account.messages;
 
 import com.alayon.msbank.account.dto.TransactionRequest;
@@ -11,10 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.listener.AcknowledgingMessageListener;
+import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.stereotype.Component;
 
-@Component("transactionConsumerListener")
-public class TransactionConsumerListener {
+@Component
+public class TransactionConsumerListenerManual implements AcknowledgingMessageListener<Integer, String> {
 
     @Autowired
     private IAccountService accountService;
@@ -22,8 +23,9 @@ public class TransactionConsumerListener {
     private ObjectMapper objectMapper;
     private final Logger log = LoggerFactory.getLogger(TransactionConsumerListenerManual.class);
 
+    @Override
     @KafkaListener(topics = "${spring.kafka.template.default-topic}")
-    public void onMessage(final ConsumerRecord<Integer, String> data) {
+    public void onMessage(final ConsumerRecord<Integer, String> data, final Acknowledgment acknowledgment) {
         try {
 
             log.info("****************************************************************");
@@ -52,6 +54,8 @@ public class TransactionConsumerListener {
             log.info("Update account {}", requestEvent.getAccountId());
             accountService.update(accountModel);
 
+            // Commit kafka
+            acknowledgment.acknowledge();
 
             log.info("****************************************************************");
             log.info("****************************************************************");
@@ -62,4 +66,4 @@ public class TransactionConsumerListener {
 
     }
 
-}*/
+}
