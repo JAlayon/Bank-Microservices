@@ -45,3 +45,9 @@ spring:
           filters:
             - StripPrefix=1
             - JwtAuthenticationFilter
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
