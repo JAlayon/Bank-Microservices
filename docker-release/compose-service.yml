@@ -31,6 +31,16 @@ services:
       - aforo255
     volumes:
       - /Users/jairsauceda/programming/spring/aforo255/ms-bank/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  analytics:
+    image: grafana/grafana:8.2.3
+    container_name: service-analytics
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - aforo255
+    depends_on:
+      - metrics
 
 networks:
   aforo255:
